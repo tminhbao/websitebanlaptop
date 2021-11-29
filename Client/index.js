@@ -43,8 +43,8 @@ conn.connect(function (err) {
     throw err;
 })
 
-var pool  = mysql.createPool({
-  connectionLimit : 10,
+var pool = mysql.createPool({
+  connectionLimit: 10,
   host: "localhost",
   user: "root",
   password: "admin",
@@ -55,16 +55,3 @@ var pool  = mysql.createPool({
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
