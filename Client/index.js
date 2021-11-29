@@ -38,10 +38,10 @@ const conn = mysql.createConnection({
   port: '3306'
 });
 
-// conn.connect(function (err) {
-//   if (err)
-//     throw err;
-// })
+conn.connect(function (err) {
+  if (err)
+    throw err;
+})
 
 var pool = mysql.createPool({
   connectionLimit: 10,
