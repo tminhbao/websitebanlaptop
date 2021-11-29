@@ -2,7 +2,7 @@ const ProductModel = require("../../models/product");
 class ShopController {
     index(req, res) {
         let listPro = ProductModel.list();
-        res.render('shop-left-sidebar',{listPro:listPro});
+        res.render('shop',{listPro:listPro});
     }
 }
 
