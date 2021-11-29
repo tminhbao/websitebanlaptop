@@ -2,7 +2,7 @@ const ProductModel = require("../../models/product");
 class ShopLeftSidebarController {
     index(req, res) {
         let listPro = ProductModel.list();
-        res.render('shop-left-sidebar',{listPro,pagination: { page: 1, limit:5,totalRows:5,queryParams: listPro }});
+        res.render('shop-left-sidebar',{listPro:listPro});
     }
 }
 exports.getAll = (req, res) => {
