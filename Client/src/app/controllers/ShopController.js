@@ -1,9 +1,8 @@
 const ProductModel = require("../../models/product");
-class ShopLeftSidebarController {
+class ShopController {
     index(req, res) {
         let listPro = ProductModel.list();
         res.render('shop-left-sidebar',{listPro:listPro});
-    }
 }
 exports.getAll = (req, res) => {
     console.log('Data is here');
@@ -11,4 +10,4 @@ exports.getAll = (req, res) => {
         console.log('We are here');
     })
 }
-module.exports = new ShopLeftSidebarController;
+module.exports = new ShopController;
