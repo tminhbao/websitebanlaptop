@@ -1,9 +1,10 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'admin',
-  database: 'laptop_webshop',
+  connectionLimit: 10,
+  host: 'sql6.freemysqlhosting.net',
+  user: 'sql6454865',
+  password: '7zB5KXjdxg',
+  database: 'sql6454865',
   charset: 'utf8_general_ci',
   port: '3306'
 });
@@ -12,3 +13,5 @@ conn.connect(function (err) {
   if (err)
     throw err;
 })
+
+module.exports = conn;

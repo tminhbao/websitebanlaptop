@@ -14,6 +14,9 @@ app.set("views", path.join(__dirname, 'src/views'));
 // Set static 
 app.use(express.static('src/public'));
 
+app.use(express.urlencoded());
+app.use(express.json());
+
 // Set route 
 const route = require('./src/routes/index');
 route(app);
