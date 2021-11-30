@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 const path = require('path');
-const Product = require('./src/models/product');
 app.set("views", path.join(__dirname, 'src/resources/views'));
 
 app.use(express.static('src/public'));

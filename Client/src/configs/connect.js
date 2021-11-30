@@ -7,10 +7,10 @@ const conn = mysql.createConnection({
   charset: 'utf8_general_ci',
   port: '3306'
 });
-
 conn.connect(function (err) {
   if (err)
     throw err;
+  console.log('Success');
 })
-
 module.exports = conn;
+
