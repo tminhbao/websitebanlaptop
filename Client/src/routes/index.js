@@ -1,4 +1,4 @@
-const homeRouter = require('./home');
+const homeRouter = require('./home')
 const errorRouter = require('./404');
 const checkoutRouter = require('./checkout')
 const loginRegisterRouter = require('./login-register');

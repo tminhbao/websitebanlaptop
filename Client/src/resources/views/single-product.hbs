@@ -13,86 +13,38 @@
 <!-- content-wraper start -->
 <div class="content-wraper">
     <div class="container">
+        {{#each listItem}}
         <div class="row single-product-area">
             <div class="col-lg-5 col-md-6">
                 <!-- Product Details Left -->
+
                 <div class="product-details-left">
                     <div class="product-details-images slider-navigation-1">
                         <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/acer-nitro-5.jpg"
-                                data-gall="myGallery">
-                                <img src="images/product/acer-nitro-5.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/acer-nitro-5.jpg"
-                                data-gall="myGallery">
-                                <img src="images/product/acer-nitro-5.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/acer-nitro-5.jpg"
-                                data-gall="myGallery">
-                                <img src="images/product/acer-nitro-5.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/acer-nitro-5.jpg"
-                                data-gall="myGallery">
-                                <img src="images/product/acer-nitro-5.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/acer-nitro-5.jpg"
-                                data-gall="myGallery">
-                                <img src="images/product/acer-nitro-5.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="images/product/acer-nitro-5.jpg"
-                                data-gall="myGallery">
-                                <img src="images/product/acer-nitro-5.jpg" alt="product image">
+                            <a class="popup-img venobox vbox-item" href="{{image}}" data-gall="myGallery">
+                                <img src="{{image}}" alt="product image">
                             </a>
                         </div>
                     </div>
-
-
-                    {{!-- <div class="product-details-thumbs slider-thumbs-1">
-                        <div class="sm-image"><img src="images/product/acer-nitro-5.jpg" alt="product image thumb">
-                        </div>
-                        <div class="sm-image"><img src="images/product/acer-nitro-5.jpg" alt="product image thumb">
-                        </div>
-                        <div class="sm-image"><img src="images/product/acer-nitro-5.jpg" alt="product image thumb">
-                        </div>
-                        <div class="sm-image"><img src="images/product/acer-nitro-5.jpg" alt="product image thumb">
-                        </div>
-                        <div class="sm-image"><img src="images/product/acer-nitro-5.jpg" alt="product image thumb">
-                        </div>
-                        <div class="sm-image"><img src="images/product/acer-nitro-5.jpg" alt="product image thumb">
-                        </div>
-                    </div> --}}
                 </div>
+
                 <!--// Product Details Left -->
             </div>
 
             <div class="col-lg-7 col-md-6">
                 <div class="product-details-view-content pt-60">
                     <div class="product-info">
-                        <h2>Acer Nitro 5</h2>
+                        <h2>{{laptop_name}}</h2>
                         <div class="price-box pt-20">
-                            <span class="new-price new-price-2">23.490.000 VNĐ</span>
+                            <span class="new-price new-price-2">{{price}}</span>
                         </div>
                         <div class="product-desc">
                             <p>
                                 <span>
-                                    - CPU: Intel Core i5 9300H
-                                    - Màn hình: 15.6" IPS (1920 x 1080)
-                                    - RAM: 1 x 8GB DDR4 2400MHz
-                                    - Đồ họa: NVIDIA GeForce GTX 1050 3GB GDDR5 / Intel UHD Graphics 630
-                                    - Lưu trữ: 256GB SSD M.2 NVMe /
-                                    - Hệ điều hành: Windows 10 Home 64-bit
-                                    - Pin: 4 cell 55 Wh Pin liền
-                                    - Khối lượng: 2.3 kg
+                                    {{laptop_cpu}} <br>
+                                    {{laptop_ram}} <br>
+                                    {{laptop_ram}} <br>
+                                    {{laptop_disk}} <br>
                                 </span>
                             </p>
                         </div>
@@ -113,9 +65,10 @@
                 </div>
             </div>
         </div>
+        {{/each}}
     </div>
 </div>
-
+{{#each listItem}}
 <div class="product-area pt-35">
     <div class="container">
         <div class="row">
@@ -132,7 +85,12 @@
         <div class="tab-content">
             <div id="description" class="tab-pane active show" role="tabpanel">
                 <div class="product-description">
-                    <span>Laptop xịn</span>
+                    <span>
+                        {{laptop_cpu}} <br>
+                        {{laptop_ram}} <br>
+                        {{laptop_ram}} <br>
+                        {{laptop_disk}} <br>
+                    </span>
                 </div>
             </div>
             <div id="reviews" class="tab-pane" role="tabpanel">
@@ -206,6 +164,7 @@
         </div>
     </div>
 </div>
+{{/each}}
 
 
 {{!-- Sản phẩm tương tự --}}
