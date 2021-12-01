@@ -14,16 +14,26 @@ const executeQuery = (query) => {
 
 // Lấy danh sách, tham số truyền vào là một page
 
-const getList = async (page) => {
+const getList = async (page,brand) => {
   const offset = (page || 1 - 1) * ITEM_PER_PAGE;
+  if (!brand)
+  {
+    const sqlPaginate = `SELECT * FROM laptop LIMIT ${ITEM_PER_PAGE} OFFSET ${offset};`;
+    const sqlTotalItem = `SELECT COUNT(*) AS totalItem FROM laptop`
+
+    const [listItem, totalItem] = await Promise.all([executeQuery(sqlPaginate), executeQuery(sqlTotalItem)])
+    const totalPage = Math.ceil((totalItem[0].totalItem || 0) / ITEM_PER_PAGE);
+    return { listItem, totalPage, page }
+  }
+  else 
+  {
+    const sqlPaginate = `SELECT * FROM laptop WHERE manufacture = '${brand}' LIMIT ${ITEM_PER_PAGE} OFFSET ${offset}`
+    const sqlTotalItem = `SELECT COUNT(*) AS totalItem FROM laptop WHERE manufacture = '${brand}'`
+    const [listItem, totalItem] = await Promise.all([executeQuery(sqlPaginate), executeQuery(sqlTotalItem)])
+    const totalPage = Math.ceil((totalItem[0].totalItem || 0) / ITEM_PER_PAGE);
+    return { listItem, totalPage, page } 
+  }
   
-  const sqlPaginate = `SELECT * FROM laptop LIMIT ${ITEM_PER_PAGE} OFFSET ${offset};`;
-  const sqlTotalItem = `SELECT COUNT(*) AS totalItem FROM laptop`
-
-  const [listItem, totalItem] = await Promise.all([executeQuery(sqlPaginate), executeQuery(sqlTotalItem)])
-  const totalPage = Math.ceil((totalItem[0].totalItem || 0) / ITEM_PER_PAGE);
-
-  return { listItem, totalPage, page }
 }
 
 const getProductDetail = async (id) => {
