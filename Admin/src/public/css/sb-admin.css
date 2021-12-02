@@ -10912,3 +10912,17 @@ body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
 }
+
+
+.pagination-box
+{
+  display: flex;
+}
+
+.pagination-box li 
+{
+  display: inline-block;
+  list-style: none;
+  margin: 10px;
+  font-size: 30px;
+}

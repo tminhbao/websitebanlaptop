@@ -1,12 +1,32 @@
 const db = require('../database/connect');
 var laptopList = [];
+const ITEM_PER_PAGE = 10;
 
-exports.list = () => {
-    let sql = 'SELECT laptop_id, mn.manufacture_name, md.model_name, lt.laptop_name, lt.laptop_cpu, lt.laptop_ram, lt.laptop_vga, lt.laptop_disk, lt.cost, lt.price, lt.inventory FROM laptop lt JOIN manufacture mn ON lt.manufacture = mn.manufacture_id join model md ON lt.model = md.model_id';
-    let query = db.query(sql,(err,result) =>{
-        laptopList = result;
+const executeQuery = (query) => {
+    return new Promise((res, rej) => {
+        db.query(query, (err, result) => {
+            if (err) rej(err)
+            else res(result);
+        })
     })
-    return laptopList;
+}
+
+const getList = async (page, laptop_id) => {
+    const offset = (page || 1 - 1) * ITEM_PER_PAGE;
+    if (!laptop_id) {
+        const sqlPaginate = `SELECT * FROM laptop LIMIT ${ITEM_PER_PAGE} OFFSET ${offset};`;
+        const sqlTotalItem = `SELECT COUNT(*) AS totalItem FROM laptop`
+        const [listItem, totalItem] = await Promise.all([executeQuery(sqlPaginate), executeQuery(sqlTotalItem)])
+        const totalPage = Math.ceil((totalItem[0].totalItem || 0) / ITEM_PER_PAGE);
+        return { listItem, totalPage, page };
+    }
+    else {
+        const sqlPaginate = `SELECT * FROM laptop WHERE laptop_id = '${laptop_id}' LIMIT ${ITEM_PER_PAGE} OFFSET ${offset}`
+        const sqlTotalItem = `SELECT COUNT(*) AS totalItem FROM laptop WHERE laptop_id = '${laptop_id}'`
+        const [listItem, totalItem] = await Promise.all([executeQuery(sqlPaginate), executeQuery(sqlTotalItem)])
+        const totalPage = Math.ceil((totalItem[0].totalItem || 0) / ITEM_PER_PAGE);
+        return { listItem, totalPage, page }
+    }
 }
 
 exports.add = (data) => {
@@ -15,7 +35,7 @@ exports.add = (data) => {
     ]
 
     let insert_laptop_sql = 'INSERT INTO laptop(laptop_id, manufacture, model, laptop_name, laptop_description, laptop_cpu, laptop_ram, laptop_vga, laptop_disk, image, cost, price, inventory) VALUES ?'
-    let query = db.query(insert_laptop_sql,[values],(err,result) => {
+    let query = db.query(insert_laptop_sql, [values], (err, result) => {
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
     })
@@ -23,8 +43,10 @@ exports.add = (data) => {
 
 exports.delete = (id) => {
     let delete_laptop_sql = 'DELETE FROM laptop WHERE laptop_id = ?';
-    let query = db.query(delete_laptop_sql, id,(err,result) => {
+    let query = db.query(delete_laptop_sql, id, (err, result) => {
         if (err) throw err;
         console.log("Number of records deleted: " + result.affectedRows);
     })
 }
+
+module.exports = { getList }
