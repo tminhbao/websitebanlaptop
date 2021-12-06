@@ -3,32 +3,6 @@ const bcrypt = require('bcryptjs');
 
 let createNewUser = (data) => {
     return new Promise(async (resolve, reject) => {
-        // Check username is exist or not
-        // let isUserExist = await checkExistUser(data.username);
-        // if (isUserExist) {
-        //     reject(`This username "${data.username}" has already exist. Please choose an other username`);
-        // } else {
-        //     // hash password
-        //     let salt = bcrypt.genSaltSync(10);
-        //     let userItem = {
-        //         firstname: data.firstname,
-        //         lastname: data.lastname,
-        //         username:data.username,
-        //         mob_no: data.mob_no,
-        //         password: bcrypt.hashSync(data.password, salt),
-        //     };
-
-        //     //create a new account
-        //     db.query(
-        //         ' INSERT INTO users set ? ', userItem,
-        //         function (err, rows) {
-        //             if (err) {
-        //                 reject(err)
-        //             }
-        //             resolve("Create a new user successful");
-        //         }
-        //     );
-        // }
         try {
             // Check username is exist or not
             let check = await checkExistUser(data.username);
