@@ -13,10 +13,33 @@ app.set("views", path.join(__dirname, 'src/resources/views'));
 
 app.use(express.static('src/public'));
 
-route(app);
-
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const connectFlash = require('connect-flash');
+const passport = require('passport')
+
+app.use(cookieParser('secret'));
+
+app.use(session({
+  secret:'secret',
+  resave:false,
+  saveUninitialized:true,
+  cookie: {
+    maxAge:1000*60*60*24
+  }
+}));
+
+// Enable flash message 
+app.use(connectFlash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+route(app);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
