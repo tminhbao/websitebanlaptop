@@ -6,18 +6,6 @@
         <a href="#">Trang chủ</a>
       </li>
     </ol>
-  
-    <!-- Area Chart Example-->
-    <div class="card mb-3">
-      <div class="card-header">
-        <i class="fas fa-chart-area"></i>
-        Area Chart Example
-      </div>
-      <div class="card-body">
-        <canvas id="myAreaChart" width="100%" height="30"></canvas>
-      </div>
-    </div>
-  
     <!-- DataTables Example -->
     <div class="card mb-3">
       <div class="card-header">
@@ -42,25 +30,23 @@
                 <th style="width: 40px;">SL</th>
               </tr>
             </thead>
+            {{#each listPro}}
             <tbody>
-              {{#if listPro}}
-              {{#each listPro}}
               <tr>
-                <th scope="row">{{this.laptop_id}}</th>
-                <td>{{this.manufacture_name}}</td>
-                <td>{{this.model_name}}</td>
-                <td>{{this.laptop_name}}</td>
-                <td>{{this.laptop_cpu}}</td>
-                <td>{{this.laptop_ram}}</td>
-                <td>{{this.laptop_vga}}</td>
-                <td>{{this.laptop_disk}}</td>
-                <td>{{this.cost}} vnđ</td>
-                <td>{{this.price}} vnđ</td>
-                <td>{{this.inventory}}</td>
+                <th scope="row">{{laptop_id}}</th>
+                <td>{{manufacture_name}}</td>
+                <td>{{model_name}}</td>
+                <td>{{laptop_name}}</td>
+                <td>{{laptop_cpu}}</td>
+                <td>{{laptop_ram}}</td>
+                <td>{{laptop_vga}}</td>
+                <td>{{laptop_disk}}</td>
+                <td>{{cost}} VNĐ</td>
+                <td>{{price}} VNĐ</td>
+                <td>{{inventory}}</td>
               </tr>
-              {{/each}}
-              {{/if}}
             </tbody>
+            {{/each}}
           </table>
         </div>
       </div>

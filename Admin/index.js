@@ -17,13 +17,41 @@ app.use(express.static('src/public'));
 app.use(express.urlencoded());
 app.use(express.json());
 
+
+
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require("express-session");
+const connectFlash = require("connect-flash");
+const passport = require("passport");
+
+app.use(cookieParser('secret'));
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: false,
+  cookie: {
+      maxAge: 1000 * 60 * 60 * 24 // 86400000 1 day
+  }
+}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+//Enable flash message
+app.use(connectFlash());
+
+//Config passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Set route 
 const route = require('./src/routes/index');
-route(app);
 
-// app.get('/admin', (req, res) => {
-//   res.render('admin/signin')
-// })
+
+
+
+route(app);
 
 
 app.listen(port, () => {

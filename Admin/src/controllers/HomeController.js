@@ -8,7 +8,7 @@ class HomeController {
         for (let i = 0; i < totalPage; i++) {
             listPage.push(i);
         }
-        res.render('home', { listPro: listItem, listPage, page });
+        res.render('home', { listPro: listItem, listPage, page, user:req.user });
     }
 }
 module.exports = new HomeController;

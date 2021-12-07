@@ -1,13 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const homeController = require('../controllers/HomeController');
+const signInController = require('../controllers/SignInController');
 
-// router.get('/signUp', admin.signUp);
-// router.post('/signUp', admin.signUpPost);
-
-// router.get('/signIn', admin.signIn);
-// router.post('/signIn', admin.signInPost);
-
-router.use('/',homeController.index);
+router.use('/',signInController.checkLoggedIn,homeController.index);
 
 module.exports = router;

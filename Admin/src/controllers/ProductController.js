@@ -1,10 +1,9 @@
 const ProductModel = require('../models/product');
 
-
 class ProductController {
     index = async (req, res) => {
-        let listPro = await ProductModel.list();
-        res.render('product/index',{listPro:listPro});
+        let {listPro,page,totalPage} = await ProductModel.getList(req.query.page || 0, req.query.name);
+        res.render('product/index',{listPro:listPro,page,totalPage});
     }
 
     add_get = async (req, res) => {
@@ -28,12 +27,12 @@ class ProductController {
         }
 
         await ProductModel.add(data);
-        res.redirect('./');
+        res.redirect('/');
     }
 
 
     delete = async (req,res) => {
-        let listPro = await ProductModel.list();
+        let listPro = await ProductModel.getList();
         res.render('product/delete',{listPro:listPro});
     }
 
